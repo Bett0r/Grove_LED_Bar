@@ -35,8 +35,8 @@ Grove_LED_Bar::Grove_LED_Bar(const std::shared_ptr<GPIO> gpio, unsigned char pin
   for (byte i = 0; i < 10; i++)
     __state[i] = 0x00;  // persist state so individual leds can be toggled
 
-  gpio_->setPinMode(__pinClock, OUTPUT);
-  gpio_->pinMode(__pinData, OUTPUT);
+  gpio_->setPinMode(__pinClock,GPIO::PinMode::Output);
+  gpio_->pinMode(__pinData, GPIO::PinMode::Output);
 }
 
 
@@ -49,7 +49,7 @@ void Grove_LED_Bar::latchData()
   for (unsigned char i = 0; i < 4; i++)
   {
 	  gpio_->writePin(__pinData, GPIO::Digital::High);
-	  gpio_->writePin(__pinData, GPIO::Digital::LOW);
+	  gpio_->writePin(__pinData, GPIO::Digital::Low);
 
   }
 }
