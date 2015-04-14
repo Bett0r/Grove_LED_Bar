@@ -34,7 +34,10 @@
 #define GLB_ON      0xff  // 8-bit 1 data
 #define GLB_OFF     0x00  // 8-bit 0 data
 
-class Grove_LED_Bar
+#include <memory>
+#include "gpio.hpp"
+
+class LED_Bar_GPIO
 {
 
 private:
@@ -51,12 +54,13 @@ protected:
   /**
    * @brief Instance of the GPIO object to read the sensor values from.
    */
+
   const std::shared_ptr<GPIO> gpio_;
 
 public:
 
-  Grove_LED_Bar(unsigned char pinClock, unsigned char pinData, bool greenToRed);  // Initialize
-  void begin(){pinMode(__pinClock, OUTPUT); pinMode(__pinData, OUTPUT);}
+  explicit LED_Bar_GPIO(const std::shared_ptr<GPIO> gpio, unsigned char pinClock, unsigned char pinData, bool greenToRed);  // Initialize
+  void begin(){gpio_->setPinMode(__pinClock, GPIO::PinMode::Output); gpio_->setPinMode(__pinData, GPIO::PinMode::Output);}
   void setGreenToRed(bool greenToRed);             // (Re)set orientation
   void setLevel(float level);                      // Set level, range from 0 to 10
   void setLed(unsigned char led, float brightness);// Set brightness for a single led, range from 0 to 1
