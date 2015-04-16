@@ -23,8 +23,7 @@
 */
 
 #include "LED_Bar_GPIO.hpp"
-#include <thread>
-#include <chrono>
+
 #include <cmath>
 
 LED_Bar_GPIO::LED_Bar_GPIO(const std::shared_ptr<GPIO> gpio, unsigned char pinClock, unsigned char pinData, bool greenToRed)

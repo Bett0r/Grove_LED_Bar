@@ -1,4 +1,4 @@
-#include <stewartPlatform/gpio.hpp>
+#include "gpio.hpp"
 
 #include <thread>
 #include <chrono>
