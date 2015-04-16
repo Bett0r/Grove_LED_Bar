@@ -25,6 +25,7 @@
 #include "LED_Bar_GPIO.hpp"
 #include <thread>
 #include <chrono>
+#include <cmath>
 
 LED_Bar_GPIO::LED_Bar_GPIO(const std::shared_ptr<GPIO> gpio, unsigned char pinClock, unsigned char pinData, bool greenToRed)
 : gpio_(gpio)
@@ -88,13 +89,13 @@ void LED_Bar_GPIO::setGreenToRed(bool greenToRed)
 // Level 4.5 means 4 LEDs on and the 5th LED's half on
 void LED_Bar_GPIO::setLevel(float level)
 {
-  level = std::max(0, std::min(10, level));l
+  level = std::max(0.0f, std::min(10.0f, level));
   level *= 8; // there are 8 (noticable) levels of brightness on each segment
   
   // Place number of 'level' of 1-bits on __state
   for (auto i = 0; i < 10; i++) {
     __state[i] = (level > 8) ? ~0 :
-                 (level > 0) ? ~(~0 << byte(level)) : 0;
+                 (level > 0) ? ~(~0 << static_cast<unsigned int>(level)) : 0;
                
     level -= 8;
   };
@@ -108,8 +109,8 @@ void LED_Bar_GPIO::setLevel(float level)
 // brightness (0-1)
 void LED_Bar_GPIO::setLed(unsigned char led, float brightness)
 {
-  led = max(1, min(10, led));
-  brightness = max(0, min(brightness, 1));
+  led = std::max(1u, std::min(10u, static_cast<unsigned int>(led)));
+  brightness = std::max(0.0f, std::min(brightness, 1.0f));
 
   // Zero based index 0-9 for bitwise operations
   led--;
@@ -129,7 +130,7 @@ void LED_Bar_GPIO::setLed(unsigned char led, float brightness)
 // led (1-10)
 void LED_Bar_GPIO::toggleLed(unsigned char led)
 {
-  led = max(1, min(10, led));
+   led = std::max(1u, std::min(10u, static_cast<unsigned int>(led)));
 
   // Zero based index 0-9 for bitwise operations
   led--;
@@ -147,8 +148,8 @@ void LED_Bar_GPIO::toggleLed(unsigned char led)
 // 11111111 brightest
 void LED_Bar_GPIO::setBits(unsigned char bits[])
 {
-
-  __state = bits & 0x3FF;
+//TODO Henning: What the hell ist happening here?
+  //__state = bits & 0x3FF;
 
   sendData(GLB_CMDMODE);
 
