@@ -14,8 +14,16 @@ int main(){
     LED_Bar_GPIO ledBar (gpio, 8, 10, false);
 
 
+
+
     std::cout << "begin:" << std::endl;
     ledBar.begin();
+
+    for (int i = 0; i <= 20; ++i) {
+        std::cout << "setLevel: "<< i*0.5 << std::endl;
+    ledBar.setLevel(i*0.5);
+
+    }
 
     // Turn on all LEDs
     std::cout << "All LEDs on" << std::endl;
