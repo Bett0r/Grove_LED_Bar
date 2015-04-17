@@ -25,6 +25,7 @@
 #include "LED_Bar_GPIO.hpp"
 
 #include <cmath>
+#include <iostream>
 
 LED_Bar_GPIO::LED_Bar_GPIO(const std::shared_ptr<GPIO> gpio, unsigned char pinClock, unsigned char pinData, bool greenToRed)
 : gpio_(gpio)
@@ -169,6 +170,11 @@ void LED_Bar_GPIO::setBits(unsigned char bits[])
   // Two extra empty bits for padding the command to the correct length
   sendData(0x00);
   sendData(0x00);
+
+  for (size_t var = 0; var < 10; ++var) {
+
+  std::cout<<"LED_Bar_GPIO::setBits["<<var<<"]: "<< bits[var]<<std::endl;
+  }
 
   latchData();
 }
