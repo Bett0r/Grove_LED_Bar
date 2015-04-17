@@ -1,0 +1,7 @@
+find_library(READLINE_LIBRARIES readline)
+find_path(READLINE_INCLUDE_DIRS readline/readline.h)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Readline DEFAULT_MSG READLINE_LIBRARIES READLINE_INCLUDE_DIRS)
+
+mark_as_advanced(READLINE_LIBRARIES READLINE_INCLUDE_DIRS)

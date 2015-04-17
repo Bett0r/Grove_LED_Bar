@@ -1,0 +1,7 @@
+find_library(WIRINGPICPP_LIBRARIES wiringPiCpp)
+find_path(WIRINGPICPP_INCLUDE_DIRS wiringPiCpp)
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(WiringPiCpp DEFAULT_MSG WIRINGPICPP_LIBRARIES WIRINGPICPP_INCLUDE_DIRS)
+
+mark_as_advanced(WIRINGPICPP_LIBRARIES WIRINGPICPP_INCLUDE_DIRS)
