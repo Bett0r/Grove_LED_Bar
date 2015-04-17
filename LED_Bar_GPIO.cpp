@@ -173,6 +173,28 @@ void LED_Bar_GPIO::setBits(unsigned char bits[])
   latchData();
 }
 
+/*
+Takes an input number and translates it to an unsigned char[10]
+and calls LED_Bar_GPIO::setBits(unsigned char bits[]) from the original code.
+
+*/
+void LED_Bar_GPIO::setBits(int bits)
+{
+    //there are 10 LEDs. The biggest number you can use is 0x3ff = 0b1111111111 = all LEDs on
+    if (bits > 1023) {
+        bits = 1023;
+    }
+    unsigned char result[10];
+
+    for (size_t n = 0; n < 10 && bits > 0; ++n) {
+
+        result[n] = bits % 2;
+        bits/=2;
+    }
+
+    LED_Bar_GPIO::setBits(result);
+}
+
 
 // Return the current state
 unsigned char const *LED_Bar_GPIO::getBits()
