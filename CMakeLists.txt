@@ -30,3 +30,10 @@ add_executable(main
 
 # Link against libraries
 target_link_libraries(main ${WIRINGPICPP_LIBRARIES}) # WiringPi-Cpp
+
+add_executable(lowLevelTest
+  lowLevelTest.cpp
+)
+
+# Link against libraries
+target_link_libraries(lowLevelTest ${WIRINGPICPP_LIBRARIES}) # WiringPi-Cpp

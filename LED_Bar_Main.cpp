@@ -23,6 +23,7 @@ int main(){
         std::cout << "setLevel: "<< i*0.5 << std::endl;
     ledBar.setLevel(i*0.5);
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
     // Turn on all LEDs
